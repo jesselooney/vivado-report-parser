@@ -1,6 +1,5 @@
 import json
 import re
-import sys
 
 
 def _parse_utilization_table(table_str: str):
@@ -61,26 +60,3 @@ def parse_utilization_report(report_str: str):
     # TODO: Parse Table of Contents and check it against the keys of `report`.
 
     return report
-
-
-def main():
-    if len(sys.argv) < 2:
-        print(f'''
-Please provide a utilization report file to parse.
-Usage: {sys.argv[0]} <input_file> [<output_file>]
-''')
-        sys.exit(1)
-    
-    input_file = sys.argv[1]
-    with open(input_file, 'r') as f:
-        report = parse_utilization_report(f.read())
-
-    if len(sys.argv) >= 3:
-        output_file = sys.argv[2]
-        json.dump(report, output_file)
-    else:
-        print(json.dumps(report))
-
-
-if __name__ == '__main__':
-    main()
