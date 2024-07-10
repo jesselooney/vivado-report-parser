@@ -1,3 +1,4 @@
+import json
 import sys
 
 from .utilization import parse_utilization_report

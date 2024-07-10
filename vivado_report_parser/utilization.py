@@ -1,6 +1,8 @@
 import json
 import re
 
+from .metadata import parse_metadata
+
 
 def _parse_utilization_table(table_str: str):
     # Expects a string starting and ending with '+' that contains a table
@@ -47,7 +49,7 @@ def parse_utilization_report(report_str: str):
     # 
     # Therefore, the top-level regex matches strings that start with a section
     # header and captures the section_title and all the contiguous following lines
-    # that start with either '+' or '|' (i.e. the lines that make up the table).
+    # that start with either '+' or '|' (i.e. the lines that make up the table).  
     
     matches = re.findall(r'\d[\d\.]* (.+)\s-+\s\s((?:[+|].*\s)+)', report_str)
 
@@ -56,6 +58,8 @@ def parse_utilization_report(report_str: str):
         section_title = match[0].strip()
         section_table = _parse_utilization_table(match[1].strip())
         report[section_title] = section_table
+
+    report['_meta'] = parse_metadata(report_str)
 
     # TODO: Parse Table of Contents and check it against the keys of `report`.
 
