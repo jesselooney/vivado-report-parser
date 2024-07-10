@@ -10,6 +10,8 @@ repository = "https://github.com/jesselooney/vivado-report-parser"
 [tool.poetry.dependencies]
 python = "^3.10"
 
+[tool.poetry.scripts]
+parse-report = "vivado_report_parser.cli:run"
 
 [build-system]
 requires = ["poetry-core"]
