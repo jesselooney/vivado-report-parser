@@ -13,6 +13,9 @@ python = "^3.10"
 [tool.poetry.scripts]
 parse-report = "vivado_report_parser.cli:run"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^8.2.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
