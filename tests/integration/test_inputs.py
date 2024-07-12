@@ -19,12 +19,12 @@ def pytest_generate_tests(metafunc):
 
 
 def test_input(input_file, output_file, golden_file, should_update_goldens):
-    with input_file.open('r') as f:
+    with input_file.open('r', newline='') as f:
         file_content = f.read()
 
     report = parse_vivado_report(file_content)
 
-    with output_file.open('w') as f:
+    with output_file.open('w', newline='') as f:
         json.dump(report, f)
 
     if should_update_goldens:

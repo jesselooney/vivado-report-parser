@@ -24,7 +24,8 @@ def parse_metadata(report_text: str) -> dict:
             ... 
         }
     '''
-    match = re.search('-+\n(?P<metadata>(?:\\|.*\n)*)-+', report_text)
+    match = re.search(r'-+\r?\n(?P<metadata>(?:\|.*\r?\n)*)-+', report_text)
+    assert match is not None, 'regex should match metadata section of report'
     metadata_text = match['metadata']
     lines = metadata_text.strip().split('\n')
     metadata = {}

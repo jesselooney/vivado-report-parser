@@ -1,0 +1,55 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
+| Date         : Wed Jul 10 12:18:20 2024
+| Host         : hostname running 64-bit major release  (build 9200)
+| Command      : report_timing -file ../reports/2024-07-10_12-18-20/8-timing.rpt
+| Design       : bd_0_wrapper
+| Device       : 7s25-csga324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             6.995ns  (required time - arrival time)
+  Source:                 in0_V[1]
+                            (input port)
+  Destination:            out_V[8]
+  Path Group:             **default**
+  Path Type:              Max at Slow Process Corner
+  Requirement:            10.000ns  (MaxDelay Path 10.000ns)
+  Data Path Delay:        3.005ns  (logic 1.059ns (35.241%)  route 1.946ns (64.759%))
+  Logic Levels:           4  (CARRY4=3 LUT2=1)
+  Output Delay:           0.000ns
+  Timing Exception:       MaxDelay Path 10.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  in0_V[1] (IN)
+                         net (fo=0)                   0.973     0.973    bd_0_i/hls_inst/inst/in0_V[1]
+    SLICE_X21Y47         LUT2 (Prop_lut2_I1_O)        0.124     1.097 r  bd_0_i/hls_inst/inst/out_V[0]_INST_0_i_3/O
+                         net (fo=1, routed)           0.000     1.097    bd_0_i/hls_inst/inst/out_V[0]_INST_0_i_3_n_0
+    SLICE_X21Y47         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     1.647 r  bd_0_i/hls_inst/inst/out_V[0]_INST_0/CO[3]
+                         net (fo=1, routed)           0.000     1.647    bd_0_i/hls_inst/inst/out_V[0]_INST_0_n_0
+    SLICE_X21Y48         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     1.761 r  bd_0_i/hls_inst/inst/out_V[4]_INST_0/CO[3]
+                         net (fo=1, routed)           0.000     1.761    bd_0_i/hls_inst/inst/out_V[4]_INST_0_n_0
+    SLICE_X21Y49         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271     2.032 r  bd_0_i/hls_inst/inst/out_V[8]_INST_0/CO[0]
+                         net (fo=0)                   0.973     3.005    out_V[8]
+                                                                      r  out_V[8] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         max delay                   10.000    10.000    
+                         clock pessimism              0.000    10.000    
+                         output delay                -0.000    10.000    
+  -------------------------------------------------------------------
+                         required time                         10.000    
+                         arrival time                          -3.005    
+  -------------------------------------------------------------------
+                         slack                                  6.995    
+
+
+
+

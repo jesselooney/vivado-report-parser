@@ -9,6 +9,18 @@ from vivado_report_parser.helpers import get_parser
 
 
 def parse_vivado_report(report_text: str) -> dict | None:
+    '''Parses a Vivado report file as a dict.
+
+    Reads the text content of a Vivado report file and selects the appropriate
+    parser from this library. If no parser is available, returns None.
+    Otherwise, returns the result of applying the parser to the report_text.
+
+    Args:
+        report_text: The text content of a Vivado report file to parse.
+    Returns:
+        A dict containing the parsed report according to the specifications of
+        the parser used, or None if no parser is available.
+    '''
     parse_report = get_parser(report_text)
     if parse_report is None:
         return None
@@ -24,10 +36,19 @@ def main():
     args = parser.parse_args()
 
     if args.file is not None:
-        with open(args.file, 'r') as f:
-            report_text = f.read()
+        try:
+            # Read file without converting \r\n to \n
+            with open(args.file, 'r', newline='') as f:
+                report_text = f.read()
+        except (FileNotFoundError, IsADirectoryError) as e:
+            print(e)
+            sys.exit(e.errno)
     else:
-        report_text = sys.stdin.read()
+        try:
+            report_text = sys.stdin.read()
+        except KeyboardInterrupt as e:
+            print(e)
+            sys.exit(130) # See https://tldp.org/LDP/abs/html/exitcodes.html.
 
     report = parse_vivado_report(report_text)
 

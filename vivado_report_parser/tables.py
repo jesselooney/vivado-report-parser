@@ -55,10 +55,9 @@ def parse_table(table_text: str, *,
         strings. These strings are taken directly from the input string and
         receive no treatment other than stripping the whitespace off the ends.
     '''
-    lines = table_text.split('\n')
-
     # TODO: replace assertions with exceptions
-    # TODO: add assertion for starting/ending with '+'
+    assert table_text[0] == '+' and table_text[-1] == '+', "A table must start and end with a '+'"
+    lines = table_text.split('\n')
     assert len(lines) >= 3, 'A table should have at least three lines: two dividers and one line of content.'
 
     # Remove the divider lines at the top and bottom of the table.
@@ -72,7 +71,7 @@ def parse_table(table_text: str, *,
     # dictionary or a true table, so we withold judgment until later parsing.
     table_kind: TableKind | None = None
     if len(lines) > 1:
-        if not set(lines[1]).issubset(set('+-')):
+        if not set(lines[1].strip()).issubset(set('+-')):
             table_kind = TableKind.DICTIONARY
         else:
             table_kind = TableKind.TABLE
@@ -82,7 +81,7 @@ def parse_table(table_text: str, *,
     # containing every cell in the table.
     rows = []
     for line in lines:
-        fields = line.strip('|').split('|')
+        fields = line.strip('|\r\n').split('|')
         rows.append([field.strip() for field in fields])
 
     column_count = len(rows[0])
@@ -109,10 +108,8 @@ def parse_table(table_text: str, *,
         raise Exception(f'table_kind was neither TableKind.DICTIONARY nor TableKind.TABLE: {table_kind=}')
 
 
-def parse_tables_report(
-    report_text: str,
-    ambiguous_parse_strategy: TableKind = TableKind.DICTIONARY
-) -> dict:
+def parse_tables_report(report_text: str,
+                        ambiguous_parse_strategy: TableKind = TableKind.DICTIONARY) -> dict:
     '''Parses a Vivado tables-style report.
 
     Parses a Vivado report in the "tables" style, such as a utilization or
@@ -163,7 +160,7 @@ def parse_tables_report(
     #     +-----------+-----------+-----+
     #
     matches = re.findall(
-        r'\d[\d\.]* (?P<section_title>.+)\s-+\s\s(?P<section_table>(?:[+|].*\s)+)',
+        r'\n[\d\.]* (?P<section_title>.+)\r?\n-+\r?\n\r?\n(?P<section_table>(?:[+|].*\r?\n)+)',
         report_text
     )
 
