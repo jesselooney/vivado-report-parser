@@ -38,7 +38,7 @@ print(data['Summary']['Total On-Chip Power (W)'])
 ## Disclaimer
 Copyright 2024 Jesse Looney
 
-All the files in this repository other than those in `./tests/integration/fixtures/inputs/` are part of vivado-report-parser.
+All the files in this repository are part of vivado-report-parser.
 
 vivado-report-parser is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
