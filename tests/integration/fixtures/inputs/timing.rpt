@@ -3,7 +3,7 @@ Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
 | Date         : Wed Jul 10 12:18:20 2024
 | Host         : hostname running 64-bit major release  (build 9200)
-| Command      : report_timing -file timing.rpt
+| Command      : report_timing -file ../reports/2024-07-10_12-18-20/8-timing.rpt
 | Design       : bd_0_wrapper
 | Device       : 7s25-csga324
 | Speed File   : -1  PRODUCTION 1.23 2018-06-13

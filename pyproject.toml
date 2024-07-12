@@ -9,9 +9,10 @@ repository = "https://github.com/jesselooney/vivado-report-parser"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+argparse = "^1.4.0"
 
 [tool.poetry.scripts]
-parse-report = "vivado_report_parser.cli:run"
+parse-vivado-report = "vivado_report_parser.parse_vivado_report:main"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.2"

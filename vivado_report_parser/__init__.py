@@ -1,2 +1,2 @@
-from .tables import parse_tables_report
-from .metadata import parse_metadata
+from vivado_report_parser.parse_vivado_report import parse_vivado_report
+from vivado_report_parser.metadata import parse_metadata
