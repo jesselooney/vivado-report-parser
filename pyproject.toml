@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vivado-report-parser"
-version = "0.3.0"
+version = "0.4.0"
 description = "A Python library for parsing Vivado report files."
 license = "GPL-3.0-or-later"
 authors = ["Jesse Looney <jmlooney64@gmail.com>"]
