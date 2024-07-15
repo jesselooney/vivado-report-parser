@@ -17,6 +17,9 @@ parse-vivado-report = "vivado_report_parser.parse_vivado_report:main"
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.2"
 
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.5.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

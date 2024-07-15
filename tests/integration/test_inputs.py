@@ -22,16 +22,24 @@ def test_input(input_file, output_file, golden_file, should_update_goldens):
     with input_file.open('r', newline='') as f:
         file_content = f.read()
 
-    report = parse_vivado_report(file_content)
-
-    with output_file.open('w', newline='') as f:
-        json.dump(report, f)
+    try:
+        result = parse_vivado_report(file_content)
+        with output_file.open('w', newline='') as f:
+            json.dump(result, f)
+    except NotImplementedError as e:
+        result = e
+        with output_file.open('w', newline='') as f:
+            f.write(repr(result))
 
     if should_update_goldens:
         with golden_file.open('wb') as f:
-            pickle.dump(report, f)
+            pickle.dump(result, f)
 
     with golden_file.open('rb') as f:
-        golden_report = pickle.load(f)
+        golden_result = pickle.load(f)
 
-    assert report == golden_report
+    if isinstance(golden_result, NotImplementedError):
+        assert isinstance(result, NotImplementedError)
+        assert result.args == golden_result.args
+    else:
+        assert result == golden_result

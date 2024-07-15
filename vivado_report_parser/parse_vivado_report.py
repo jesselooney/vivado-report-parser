@@ -8,7 +8,7 @@ import argparse
 from vivado_report_parser.helpers import get_parser
 
 
-def parse_vivado_report(report_text: str) -> dict | None:
+def parse_vivado_report(report_text: str) -> dict:
     '''Parses a Vivado report file as a dict.
 
     Reads the text content of a Vivado report file and selects the appropriate
@@ -20,12 +20,12 @@ def parse_vivado_report(report_text: str) -> dict | None:
     Returns:
         A dict containing the parsed report according to the specifications of
         the parser used, or None if no parser is available.
+    Raises:
+        NotImplementedError: If this library does not implement a parser for the
+          kind of report given.
     '''
     parse_report = get_parser(report_text)
-    if parse_report is None:
-        return None
-    else:
-        return parse_report(report_text)
+    return parse_report(report_text)
 
 
 def main():

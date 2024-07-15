@@ -14,8 +14,28 @@ parsers_by_generating_command = {
 
 
 def get_parser(report_text: str) -> Callable:
-    '''Returns the appropriate parser for the given report file.'''
+    '''Returns the appropriate parser for the given report file.
+
+    Reads the metadata section of the report_text and looks up the parser to use
+    based on the name of the command that generated the report. If no parser is
+    available, raises a NotImplementedError. Otherwise, returns the parser
+    function.
+
+    Args:
+        report_text: The text of a Vivado report file.
+    Returns:
+        A Callable f such that f(report_text) succeeds and returns a dictionary
+        representing the parsed report file, with semantics corresponding to the
+        parser used.
+    Raises:
+        NotImplementedError: If this library does not implement a parser for the
+          kind of report given.
+    '''
     # TODO Expose parser options like ambiguous_parse_strategy for parse_tables_report
     command = get_generating_command(report_text)
-    return parsers_by_generating_command.get(command)
+    parser = parsers_by_generating_command.get(command)
+    if parser is None:
+        raise NotImplementedError('No parser is currently available for this report type.')
+    else:
+        return parser
 
