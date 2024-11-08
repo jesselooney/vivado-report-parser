@@ -86,6 +86,8 @@ def parse_table(
     # containing every cell in the table.
     rows = []
     for line in lines:
+        if set(line) == set(('+', '-')):  # remove division rows
+            continue
         fields = line.strip("|\r\n").split("|")
         rows.append([field.strip() for field in fields])
 
